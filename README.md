@@ -38,6 +38,9 @@ I followed these links for tutorials and additional information;
 https://www.youtube.com/watch?v=YYEC7ydDj4k<br>
 https://www.npmjs.com/package/console.table<br>
 https://stackoverflow.com/questions/19678769/error-1049-42000-unknown-database-mydatabasename<br>
+http://g2pc1.bu.edu/~qzpeng/manual/MySQL%20Commands.htm<br>
+https://levelup.gitconnected.com/database-seeding-in-node-js-2b2eec5bfaa1<br>
+https://joshuawootonn.medium.com/loopback-creating-a-seed-script-a6e135fe5883<br>
 
 ## License
 
