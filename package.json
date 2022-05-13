@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "console.table": "^0.10.0",
     "node.js": "^0.0.1-security"
   }
 }
