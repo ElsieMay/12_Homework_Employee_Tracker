@@ -36,6 +36,8 @@ I was aided by the BCS Learning assistant. They instructed me well.
 I followed these links for tutorials and additional information;
 
 https://www.youtube.com/watch?v=YYEC7ydDj4k<br>
+https://www.npmjs.com/package/console.table<br>
+https://stackoverflow.com/questions/19678769/error-1049-42000-unknown-database-mydatabasename<br>
 
 ## License
 
