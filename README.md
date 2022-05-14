@@ -41,6 +41,7 @@ https://stackoverflow.com/questions/19678769/error-1049-42000-unknown-database-m
 http://g2pc1.bu.edu/~qzpeng/manual/MySQL%20Commands.htm<br>
 https://levelup.gitconnected.com/database-seeding-in-node-js-2b2eec5bfaa1<br>
 https://joshuawootonn.medium.com/loopback-creating-a-seed-script-a6e135fe5883<br>
+https://www.freecodecamp.org/news/how-to-use-node-environment-variables-with-a-dotenv-file-for-node-js-and-npm/<br>
 
 ## License
 

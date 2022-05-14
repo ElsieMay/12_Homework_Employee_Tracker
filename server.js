@@ -3,55 +3,23 @@ const cTable = require("console.table");
 const mysql = require("mysql2");
 const inquirer = require("inquirer");
 const express = require("express");
+const sequelize = require("./config/connection");
 
-const PORT = process.env.PORT || 3001;
 const app = express();
+const PORT = process.env.PORT || 3001;
 
 // Express middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// Create connection
-const db = mysql.createConnection(
-	{
-		host: "localhost",
-		// MySQL username,
-		user: "root",
-		// TODO: Add MySQL password here
-		password: "Beachball1",
-		// database: "company_db",
-	},
-	console.log(`Connected to the company_db database.`)
-);
-
-// Connect to MySQL
-db.connect((err) => {
-	if (err) {
-		throw err;
-	}
-	console.log("MySQL connected");
-});
-
-// Create Database
-app.get("/createddb", (req, res) => {
-	const sql = `CREATE DATABASE node MySQL`;
-
-	db.query(sql, (err, rows) => {
-		if (err) {
-			res.status(500).json({ error: err.message });
-			return;
-		}
-		res.json({
-			message: "success",
-		});
-	});
-});
+require("dotenv").config();
 
 // Default response for any other request (Not Found)
 app.use((req, res) => {
 	res.status(404).end();
 });
 
-app.listen(PORT, () => {
-	console.log(`Server running on port ${PORT}`);
+// turn on connection to db and server
+sequelize.sync({ force: false }).then(() => {
+	app.listen(PORT, () => console.log("Now listening"));
 });
