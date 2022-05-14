@@ -8,10 +8,11 @@
 		"mysql": "^2.18.1",
 		"mysql2": "^2.3.3",
 		"node.js": "^0.0.1-security",
-		"seed": "^0.4.4"
+		"seed": "^0.4.4",
+		"sequelize": "^6.19.0"
 	},
 	"scripts": {
-		"start": "node -r dotenv/config . dotenv_config_path=./.env",
+		"start": "node server.js",
 		"seed": "node ./db/seeds.sql"
 	}
 }

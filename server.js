@@ -2,24 +2,21 @@ const cTable = require("console.table");
 // Import and require mysql2
 const mysql = require("mysql2");
 const inquirer = require("inquirer");
-const express = require("express");
-const sequelize = require("./config/connection");
+const connection = require("./config/connection");
 
-const app = express();
-const PORT = process.env.PORT || 3001;
+// Uses inquirer to generate list of options
 
-// Express middleware
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-
-require("dotenv").config();
-
-// Default response for any other request (Not Found)
-app.use((req, res) => {
-	res.status(404).end();
-});
-
-// turn on connection to db and server
-sequelize.sync({ force: false }).then(() => {
-	app.listen(PORT, () => console.log("Now listening"));
-});
+const promptUser = (connection) => {
+	inquirer
+		.prompt([
+			{
+				type: "list",
+				name: "options",
+				message: "What would you like to do?",
+				choices: ["View all employees", "Add an employee", "Update an employee role", "View all roles", "Add a role", "View all departments", "Add a department", "Update employee managers", "View employees by manager", "View employees by department", "Delete department", "Delete role", "Delete employee", "View utilized budget", "Exit"],
+			},
+		])
+		.then((answers) => {
+			const { choices } = answers;
+		});
+};
