@@ -46,6 +46,7 @@ https://www.youtube.com/watch?v=gZugKSoAyoY<br>
 https://www.digitalocean.com/community/tutorials/nodejs-interactive-command-line-prompts<br>
 https://www.w3schools.com/sql/func_sqlserver_concat.asp<br>
 https://stackoverflow.com/questions/48576847/how-to-combine-first-name-middle-name-and-last-name-in-sql-server<br>
+https://developer.mozilla.org/en-US/docs/Web/API/console/table<br>
 
 ## License
 

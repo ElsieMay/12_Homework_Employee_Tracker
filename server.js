@@ -34,9 +34,18 @@ viewAllEmployees = () => {
                         department.name AS department, 
                         role.salary,
                         rtrim(concat(manager.first_name + ' ', manager.last_name + ' '))
-                        FROM employee, department, role`;
-	connection.promise().query(sql, (error, response) => {
+                        FROM employee, department, role
+                        LEFT JOIN role
+                        ON employee.role_id = role.id
+                        LEFT JOIN department
+                        ON role.department_id = department.id
+                        LEFT JOIN manager
+                        ON employee.manager_id = manager.id`;
+	connection.promise().query(sql, (error, data) => {
 		if (error) throw error;
+		console.table(data);
 		promptUser();
 	});
 };
+
+promptUser();
