@@ -150,7 +150,7 @@ addAnEmployee = () => {
 
 						const managerSelect = `SELECT * FROM employee`;
 
-						connection.query(sql, (error, data) => {
+						connection.query(managerSelect, (error, data) => {
 							if (error) throw error;
 							console.table(data);
 							promptUser();
@@ -172,13 +172,11 @@ addAnEmployee = () => {
 
 									employeeDetails.push(manager);
 
-									const sql = `INSERT INTO employee (first_name, last_name, role_is, manager_id)
-                                                VALUES (?,?,?,?)`;
+									const managerTbl = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)`;
 
-									connection.query(sql, (error, data) => {
+									connection.query(managerTbl, employeeDetails, (error, result) => {
 										if (error) throw error;
-
-										console.log("New employee has been added to the database");
+										console.log("New employee has been added to the database.");
 
 										viewAllEmployees();
 									});
