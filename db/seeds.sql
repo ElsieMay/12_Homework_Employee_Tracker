@@ -1,4 +1,5 @@
 /* Values of department names */
+USE company_db;
 INSERT INTO department (name)
 VALUES ("Sales"),
        ("Engineering"),
@@ -17,7 +18,7 @@ VALUES ("Sales Lead", 100000, 1),
        ("Lawyer", 190000, 4);
 
 /* Values of employee */
-INSERT INTO role (first_name, last_name, role_id, manager_id)
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES ("John", "Doe", 1, null),
        ("Mike", "Chan", 2, 1),
        ("Ashley", "Rodriguez", 3, null),
