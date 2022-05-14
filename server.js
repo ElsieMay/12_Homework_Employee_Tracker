@@ -3,9 +3,9 @@ const cTable = require("console.table");
 const mysql = require("mysql2");
 const inquirer = require("inquirer");
 const connection = require("./config/connection");
+const { response } = require("express");
 
 // Uses inquirer to generate list of options
-
 const promptUser = (connection) => {
 	inquirer
 		.prompt([
@@ -18,5 +18,25 @@ const promptUser = (connection) => {
 		])
 		.then((answers) => {
 			const { choices } = answers;
+
+			if (choices === "View all employees") {
+				viewAllEmployees();
+			}
 		});
+};
+// Function to view all employees in database
+viewAllEmployees = () => {
+	console.log("This is a comprehensive list of all employees in the company database");
+	const sql = `SELECT employee_id,
+                        employee.first_name,
+                        employee.last_name,
+                        role.title,
+                        department.name AS department, 
+                        role.salary,
+                        rtrim(concat(manager.first_name + ' ', manager.last_name + ' '))
+                        FROM employee, department, role`;
+	connection.promise().query(sql, (error, response) => {
+		if (error) throw error;
+		promptUser();
+	});
 };

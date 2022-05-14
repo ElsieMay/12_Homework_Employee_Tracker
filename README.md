@@ -44,6 +44,8 @@ https://joshuawootonn.medium.com/loopback-creating-a-seed-script-a6e135fe5883<br
 https://www.freecodecamp.org/news/how-to-use-node-environment-variables-with-a-dotenv-file-for-node-js-and-npm/<br>
 https://www.youtube.com/watch?v=gZugKSoAyoY<br>
 https://www.digitalocean.com/community/tutorials/nodejs-interactive-command-line-prompts<br>
+https://www.w3schools.com/sql/func_sqlserver_concat.asp<br>
+https://stackoverflow.com/questions/48576847/how-to-combine-first-name-middle-name-and-last-name-in-sql-server<br>
 
 ## License
 
