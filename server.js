@@ -126,7 +126,7 @@ addAnEmployee = () => {
 			},
 		])
 		.then((answer) => {
-			const employeeDetails = [answer.firstNameInput, answer.laststNameInput];
+			const employeeDetails = [answer.firstName, answer.lastName];
 
 			const roleSelect = `SELECT role.id, role.title FROM role`;
 
