@@ -47,6 +47,10 @@ https://www.digitalocean.com/community/tutorials/nodejs-interactive-command-line
 https://www.w3schools.com/sql/func_sqlserver_concat.asp<br>
 https://stackoverflow.com/questions/48576847/how-to-combine-first-name-middle-name-and-last-name-in-sql-server<br>
 https://developer.mozilla.org/en-US/docs/Web/API/console/table<br>
+https://www.mysqltutorial.org/mysql-nodejs/update/<br>
+https://www.w3schools.com/nodejs/nodejs_mysql_update.asp<br>
+https://www.mysqltutorial.org/mysql-update-data.aspx<br>
+https://www.w3schools.com/sql/sql_update.asp<br>
 
 ## License
 
