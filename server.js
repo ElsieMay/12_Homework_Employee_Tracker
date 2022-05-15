@@ -577,7 +577,7 @@ deleteRole = () => {
 				},
 			])
 			.then((response) => {
-				const roleId = response.departments;
+				const roleId = response.role;
 				const roleSql = `DELETE 
                                 FROM role 
                                 WHERE role.id = ?`;
@@ -610,7 +610,7 @@ deleteEmployee = () => {
 				},
 			])
 			.then((response) => {
-				const empId = response.departments;
+				const empId = response.employees;
 				const empSql = `DELETE 
                                 FROM employee 
                                 WHERE employee.id = ?`;
