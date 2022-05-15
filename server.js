@@ -187,4 +187,71 @@ addAnEmployee = () => {
 		});
 };
 
+// Function to add a role to database
+addARole = () => {
+	inquirer
+		.prompt([
+			{
+				type: "input",
+				name: "roleType",
+				message: "What is the name of this new role?",
+				validate: (roleTypeInput) => {
+					if (roleTypeInput) {
+						return true;
+					} else {
+						console.log("A role name is required.");
+						return false;
+					}
+				},
+			},
+			{
+				type: "input",
+				name: "roleSalary",
+				message: "What is the salary of this role?",
+				validate: (roleSalaryInput) => {
+					if (roleSalaryInput) {
+						return true;
+					} else {
+						console.log("A role salary is required.");
+						return false;
+					}
+				},
+			},
+		])
+		.then((answer) => {
+			const roleDetails = [answer.roleType, answer.roleSalary];
+
+			const depSelect = `SELECT name, id FROM department`;
+
+			connection.query(depSelect, (error, data) => {
+				if (error) throw error;
+
+				const departments = data.map(({ name, id }) => ({ name: name, value: id }));
+				inquirer
+					.prompt([
+						{
+							type: "list",
+							name: "department",
+							message: "What department does the role belong to?",
+							choices: departments,
+						},
+					])
+					.then((depChoice) => {
+						const departments = depChoice.departments;
+
+						roleDetails.push(departments);
+
+						const depSql = `INSERT INTO role (title, salary, department_id)
+                        VALUES (?, ?, ?)`;
+
+						connection.query(depSql, roleDetails, (error, result) => {
+							if (error) throw error;
+							console.table(data);
+							viewAllRoles();
+						});
+					});
+			});
+		});
+};
+
 promptUser();
