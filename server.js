@@ -430,4 +430,28 @@ updateEmployeeManager = () => {
 	});
 };
 
+// Function to view employees by manager
+
+// Function to view employees by department
+viewEmployeesByDepartment = () => {
+	//SELECT employees and their departments from table
+	const empDepartmentSql = `SELECT employee.first_name, 
+                              employee.last_name,
+                              employee.id,
+                              department.name AS department
+                              FROM employee
+                              LEFT JOIN role 
+                              ON employee.role_id = role.id 
+                              LEFT JOIN department 
+                              ON role.department_id = department.id`;
+	connection.query(empDepartmentSql, (error, response) => {
+		if (error) {
+			return console.error(error.message);
+		}
+		console.table(response);
+		console.log("Viewing employees via department");
+		promptUser();
+	});
+};
+
 promptUser();
