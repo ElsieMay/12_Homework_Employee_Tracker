@@ -452,6 +452,34 @@ viewEmployeesByManager = () => {
 
 // Function to view employees by department
 viewEmployeesByDepartment = () => {
+	//SELECT from list of departments
+	const depSelect = `SELECT name, id FROM department`;
+
+	connection.query(depSelect, (error, data) => {
+		if (error) throw error;
+
+		const departments = data.map(({ name, id }) => ({ name: name, value: id }));
+		inquirer.prompt([
+			{
+				type: "list",
+				name: "departmentss",
+				message: "What department does the role belong to?",
+				choices: departments,
+			},
+		]);
+		connection.query(empDepartmentSql, (error, response) => {
+			if (error) {
+				return console.error(error.message);
+			}
+			console.table(response);
+			console.log("Viewing employees by department");
+			promptUser();
+	});
+	// });
+};
+
+// Function to view employees by department
+viewUtilizedBudget = () => {
 	//SELECT employees and their departments from table
 	const empDepartmentSql = `SELECT employee.first_name, 
                               employee.last_name,
