@@ -254,4 +254,34 @@ addARole = () => {
 		});
 };
 
+// Function to add a department to database
+addADepartment = () => {
+	inquirer
+		.prompt([
+			{
+				type: "input",
+				name: "depType",
+				message: "What is the name of the department?",
+				validate: (depTypeInput) => {
+					if (depTypeInput) {
+						return true;
+					} else {
+						console.log("A department name is required.");
+						return false;
+					}
+				},
+			},
+		])
+		.then((answer) => {
+			const depSql = `INSERT INTO department (name)
+        VALUES (?)`;
+
+			connection.query(depSql, answer.depType, (error, result) => {
+				if (error) throw error;
+				console.table(result);
+				viewAllDepartments();
+			});
+		});
+};
+
 promptUser();
