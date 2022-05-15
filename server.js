@@ -558,35 +558,35 @@ deleteDepartment = () => {
 	});
 };
 
-// Function to delete a department
-deleteDepartment = () => {
+// Function to delete a role
+deleteRole = () => {
 	//SELECT from list of departments
-	const depSelect = `SELECT department.id, department.name FROM department AS department`;
+	const depSelect = `SELECT role.id, role.title FROM role AS role`;
 
 	connection.query(depSelect, (error, data) => {
 		if (error) throw error;
 
-		const departments = data.map(({ name, id }) => ({ name: name, value: id }));
+		const role = data.map(({ title, id }) => ({ name: title, value: id }));
 		inquirer
 			.prompt([
 				{
 					type: "list",
-					name: "departments",
-					message: "What department would you like to delete?",
-					choices: departments,
+					name: "role",
+					message: "What role would you like to delete?",
+					choices: role,
 				},
 			])
 			.then((response) => {
-				const departmentId = response.departments;
-				const empDepartmentSql = `DELETE 
-                                          FROM department 
-                                          WHERE department.id = ?`;
-				connection.query(empDepartmentSql, departmentId, (error, response) => {
+				const roleId = response.departments;
+				const roleSql = `DELETE 
+                                FROM role 
+                                WHERE role.id = ?`;
+				connection.query(roleSql, roleId, (error, response) => {
 					if (error) {
 						return console.error(error.message);
 					}
-					console.log("Department has been removed");
-					viewAllDepartments();
+					console.log("This role has been removed");
+					viewAllRoles();
 				});
 			});
 	});
