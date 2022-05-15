@@ -307,7 +307,7 @@ updateEmployeeRole = () => {
 		}
 		// Array of employee names
 		const employeeArray = [];
-		response.forEach((role) => {
+		response.forEach((employee) => {
 			{
 				employeeArray.push(`${employee.first_name} ${employee.last_name}`);
 			}
@@ -358,6 +358,8 @@ updateEmployeeRole = () => {
 							if (error) {
 								return console.error(error.message);
 							}
+							console.log("Employee role has been added");
+							viewAllEmployees();
 						});
 					});
 			});
