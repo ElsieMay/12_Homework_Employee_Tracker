@@ -462,11 +462,12 @@ viewEmployeesByDepartment = () => {
 		inquirer.prompt([
 			{
 				type: "list",
-				name: "departmentss",
+				name: "departments",
 				message: "What department does the role belong to?",
 				choices: departments,
 			},
 		]);
+
 		connection.query(empDepartmentSql, (error, response) => {
 			if (error) {
 				return console.error(error.message);
@@ -474,22 +475,21 @@ viewEmployeesByDepartment = () => {
 			console.table(response);
 			console.log("Viewing employees by department");
 			promptUser();
+		});
 	});
-	// });
 };
 
 // Function to view employees by department
 viewUtilizedBudget = () => {
 	//SELECT employees and their departments from table
-	const empDepartmentSql = `SELECT employee.first_name, 
-                              employee.last_name,
-                              employee.id,
-                              department.name AS department
-                              FROM employee
-                              LEFT JOIN role 
-                              ON employee.role_id = role.id 
-                              LEFT JOIN department 
-                              ON role.department_id = department.id`;
+	const empDepartmentSql = `SELECT department_id
+                             AS id,
+                             department.name AS department,
+                             SUM (salary)
+                             AS budget
+                             FROM role
+                             LEFT JOIN department
+                             ON role.department_id = department.id`;
 	connection.query(empDepartmentSql, (error, response) => {
 		if (error) {
 			return console.error(error.message);

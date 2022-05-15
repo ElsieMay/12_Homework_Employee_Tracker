@@ -51,6 +51,7 @@ https://www.mysqltutorial.org/mysql-nodejs/update/<br>
 https://www.w3schools.com/nodejs/nodejs_mysql_update.asp<br>
 https://www.mysqltutorial.org/mysql-update-data.aspx<br>
 https://www.w3schools.com/sql/sql_update.asp<br>
+https://www.w3schools.com/sql/func_mysql_sum.asp<br>
 
 ## License
 
