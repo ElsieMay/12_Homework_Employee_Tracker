@@ -51,6 +51,18 @@ const promptUser = (connection) => {
 			if (choices === "View utilized budget") {
 				viewUtilizedBudget();
 			}
+			if (choices === "Delete department") {
+				deleteDepartment();
+			}
+			if (choices === "Delete role") {
+				deleteRole();
+			}
+			if (choices === "Delete employee") {
+				deleteEmployee();
+			}
+			if (choices === "Exit") {
+				Exit();
+			}
 		});
 };
 
@@ -459,23 +471,34 @@ viewEmployeesByDepartment = () => {
 		if (error) throw error;
 
 		const departments = data.map(({ name, id }) => ({ name: name, value: id }));
-		inquirer.prompt([
-			{
-				type: "list",
-				name: "departments",
-				message: "What department does the role belong to?",
-				choices: departments,
-			},
-		]);
-
-		connection.query(empDepartmentSql, (error, response) => {
-			if (error) {
-				return console.error(error.message);
-			}
-			console.table(response);
-			console.log("Viewing employees by department");
-			promptUser();
-		});
+		inquirer
+			.prompt([
+				{
+					type: "list",
+					name: "departments",
+					message: "What department does the role belong to?",
+					choices: departments,
+				},
+			])
+			.then((response) => {
+				const departmentId = response.departments;
+				const empDepartmentSql = `SELECT employee.id, 
+                                          employee.first_name, 
+                                          employee.last_name, 
+                                          role.title 
+                                          FROM employee 
+                                          LEFT JOIN role on employee.role_id  = role.id 
+                                          LEFT JOIN department department on role.department_id = department.id 
+                                          WHERE department.id = ?`;
+				connection.query(empDepartmentSql, departmentId, (error, response) => {
+					if (error) {
+						return console.error(error.message);
+					}
+					console.table(response);
+					console.log("Viewing employees by department");
+					promptUser();
+				});
+			});
 	});
 };
 
@@ -489,7 +512,8 @@ viewUtilizedBudget = () => {
                              AS budget
                              FROM role
                              LEFT JOIN department
-                             ON role.department_id = department.id`;
+                             ON role.department_id = department.id
+                             GROUP BY department_id`;
 	connection.query(empDepartmentSql, (error, response) => {
 		if (error) {
 			return console.error(error.message);
