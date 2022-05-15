@@ -231,7 +231,7 @@ addARole = () => {
 					.prompt([
 						{
 							type: "list",
-							name: "department",
+							name: "departmentss",
 							message: "What department does the role belong to?",
 							choices: departments,
 						},
