@@ -367,4 +367,61 @@ updateEmployeeRole = () => {
 	});
 };
 
+// Function to update an employee's role in the database
+updateEmployeeManager = () => {
+	//SELECT employee and role values from table
+	let managerSql = `SELECT employee.first_name, 
+                        employee.last_name,
+                        employee.id,
+                        employee.manager_id
+                        FROM employee`;
+	connection.query(managerSql, (error, response) => {
+		if (error) {
+			return console.error(error.message);
+		}
+		// Array of employee names
+		const employeeArray = [];
+		response.forEach((employee) => {
+			{
+				employeeArray.push(`${employee.first_name} ${employee.last_name}`);
+			}
+				// Prompt to select employee
+				inquirer
+					.prompt([
+						{
+							type: "list",
+							name: "employeeList",
+							message: "What employee would you like to update?",
+							choices: employeeArray,
+						},
+						{
+							type: "list",
+							name: "newManager",
+							message: "Who would you like to update their manager to?",
+							choices: employeeArray,
+						},
+					])
+					.then((answer) => {
+						let employeeSelected, managerId;
+
+						response.forEach((employee) => {
+							if (answer.employeeList === `${employee.first_name} ${employee.last_name}`) {
+								employeeSelected = employee.id;
+							}
+						});
+
+						const sql = `UPDATE employee SET employee.role_id = ? WHERE employee.id = ?`;
+						connection.query(sql, [updatedRole, empId], (error, response) => {
+							if (error) {
+								return console.error(error.message);
+							}
+							console.log("Employee role has been added");
+							viewAllEmployees();
+						});
+					});
+			});
+		});
+	});
+};
+
 promptUser();
