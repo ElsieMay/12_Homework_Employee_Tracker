@@ -431,6 +431,24 @@ updateEmployeeManager = () => {
 };
 
 // Function to view employees by manager
+viewEmployeesByManager = () => {
+	//SELECT employees and their departments from table
+	const empDepartmentSql = `SELECT employee.id,
+                            employee.first_name,
+                            employee.last_name,
+                            CONCAT(manager.first_name + ' ', manager.last_name + ' ') AS manager
+                            FROM employee
+                            LEFT JOIN employee manager
+                            ON employee.manager_id = manager.id`;
+	connection.query(empDepartmentSql, (error, response) => {
+		if (error) {
+			return console.error(error.message);
+		}
+		console.table(response);
+		console.log("Viewing employees by manager");
+		promptUser();
+	});
+};
 
 // Function to view employees by department
 viewEmployeesByDepartment = () => {
@@ -449,7 +467,7 @@ viewEmployeesByDepartment = () => {
 			return console.error(error.message);
 		}
 		console.table(response);
-		console.log("Viewing employees via department");
+		console.log("Viewing employees by department");
 		promptUser();
 	});
 };
