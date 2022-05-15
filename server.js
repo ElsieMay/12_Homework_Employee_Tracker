@@ -292,7 +292,7 @@ addADepartment = () => {
 
 // Function to update an employee's role in the database
 updateEmployeeRole = () => {
-	//SELECT all values from table
+	//SELECT employee and role values from table
 	let employeeSql = `SELECT employee.first_name, 
                         employee.last_name,
                         employee.id,
@@ -305,43 +305,63 @@ updateEmployeeRole = () => {
 		if (error) {
 			return console.error(error.message);
 		}
+		// Array of employee names
 		const employeeArray = [];
 		response.forEach((role) => {
-			employeeArray.push(`${employee.first_name} ${employee.last_name}`);
-		});
-		//SELECT role values from table
-		let employeeSql = `SELECT role.id, role.title FROM role`;
-		connection.query(employeeSql, (error, response) => {
-			if (error) {
-				return console.error(error.message);
+			{
+				employeeArray.push(`${employee.first_name} ${employee.last_name}`);
 			}
-			const roleArray = [];
-			response.forEach((role) => {
-				roleArray.push(role.title);
-			});
-			inquirer.prompt([
-				{
-					type: "list",
-					name: "employeeList",
-					message: "What employee would you like to update?",
-					choices: employeeArray,
-				},
-				{
-					type: "list",
-					name: "newRole",
-					message: "What would you like to update their role to?",
-					choices: employeeArray,
-				},
-			]);
-		});
-		// //Update values
-		// let sql = `UPDATE `;
+			//SELECT role values from table
+			let employeeSql = `SELECT role.id, role.title FROM role`;
+			connection.query(employeeSql, (error, response) => {
+				if (error) {
+					return console.error(error.message);
+				}
+				const roleArray = [];
+				response.forEach((role) => {
+					roleArray.push(role.title);
+				});
 
-		// // execute the UPDATE
-		// connection.query(sql, data, (error, results, fields) => {
-		// 	if (error) {
-		// 		return console.error(error.message);
-		// 	}
+				// Prompt to select employee
+				inquirer
+					.prompt([
+						{
+							type: "list",
+							name: "employeeList",
+							message: "What employee would you like to update?",
+							choices: employeeArray,
+						},
+						{
+							type: "list",
+							name: "newRole",
+							message: "What would you like to update their role to?",
+							choices: roleArray,
+						},
+					])
+					.then((answer) => {
+						let updatedRole, empId;
+
+						response.forEach((role) => {
+							if (answer.newRole === role.title) {
+								updatedRole = role.id;
+							}
+						});
+
+						response.forEach((employee) => {
+							if (answer.employeeList === `${employee.first_name} ${employee.last_name}`) {
+								empId = employee.id;
+							}
+						});
+
+						const sql = `UPDATE employee SET employee.role_id = ? WHERE employee.id = ?`;
+						connection.query(sql, [updatedRole, empId], (error, response) => {
+							if (error) {
+								return console.error(error.message);
+							}
+						});
+					});
+			});
+		});
 	});
 };
 
