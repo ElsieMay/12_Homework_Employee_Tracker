@@ -257,7 +257,7 @@ addARole = () => {
 					.prompt([
 						{
 							type: "list",
-							name: "departmentss",
+							name: "departments",
 							message: "What department does the role belong to?",
 							choices: departments,
 						},
@@ -521,6 +521,41 @@ viewUtilizedBudget = () => {
 		console.table(response);
 		console.log("Viewing employees by department");
 		promptUser();
+	});
+};
+
+// Function to delete a department
+deleteDepartment = () => {
+	//SELECT from list of departments
+	const depSelect = `SELECT department.id, department.name FROM department AS department`;
+
+	connection.query(depSelect, (error, data) => {
+		if (error) throw error;
+
+		const departments = data.map(({ name, id }) => ({ name: name, value: id }));
+		inquirer
+			.prompt([
+				{
+					type: "list",
+					name: "departments",
+					message: "What department would you like to delete?",
+					choices: departments,
+				},
+			])
+			.then((response) => {
+				const departmentId = response.departments;
+				const empDepartmentSql = `DELETE 
+                                          FROM department 
+                                          WHERE department.id = ?`;
+				connection.query(empDepartmentSql, departmentId, (error, response) => {
+					if (error) {
+						return console.error(error.message);
+					}
+					console.table(response);
+					console.log("Department has been removed");
+					promptUser();
+				});
+			});
 	});
 };
 

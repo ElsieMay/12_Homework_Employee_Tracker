@@ -52,6 +52,8 @@ https://www.w3schools.com/nodejs/nodejs_mysql_update.asp<br>
 https://www.mysqltutorial.org/mysql-update-data.aspx<br>
 https://www.w3schools.com/sql/sql_update.asp<br>
 https://www.w3schools.com/sql/func_mysql_sum.asp<br>
+https://popsql.com/learn-sql/mysql/how-to-delete-in-mysql<br>
+https://www.w3schools.com/mysql/mysql_delete.asp<br>
 
 ## License
 
