@@ -61,7 +61,7 @@ const promptUser = (connection) => {
 				deleteEmployee();
 			}
 			if (choices === "Exit") {
-				Exit();
+				connection.end();
 			}
 		});
 };
@@ -587,6 +587,39 @@ deleteRole = () => {
 					}
 					console.log("This role has been removed");
 					viewAllRoles();
+				});
+			});
+	});
+};
+
+deleteEmployee = () => {
+	//SELECT from list of departments
+	const empSelect = `SELECT employee.id, employee.first_name, employee.last_name FROM employee AS employee`;
+
+	connection.query(empSelect, (error, data) => {
+		if (error) throw error;
+
+		const employees = data.map(({ id, first_name, last_name }) => ({ name: first_name + " " + last_name, value: id }));
+		inquirer
+			.prompt([
+				{
+					type: "list",
+					name: "employees",
+					message: "What employee would you like to delete?",
+					choices: employees,
+				},
+			])
+			.then((response) => {
+				const empId = response.departments;
+				const empSql = `DELETE 
+                                FROM employee 
+                                WHERE employee.id = ?`;
+				connection.query(empSql, empId, (error, response) => {
+					if (error) {
+						return console.error(error.message);
+					}
+					console.log("Employee has been removed");
+					viewAllEmployees();
 				});
 			});
 	});
