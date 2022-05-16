@@ -23,7 +23,7 @@ The Github repository can be viewed via this link, https://github.com/ElsieMay/1
 
 ## App Screenshots
 
-![Screenshot](https://github.com/ElsieMay/11_Homework_Express_Js_Note_Taker/blob/main/images/Screen%20Shot%202022-05-08%20at%209.19.50%20pm.png)
+![Screenshot](https://github.com/ElsieMay/12_Homework_Employee_Tracker/blob/main/images/Screen%20Shot%202022-05-16%20at%2010.44.44%20pm.png)
 
 ## Demo
 
