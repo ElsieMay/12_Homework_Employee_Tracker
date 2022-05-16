@@ -4,7 +4,7 @@
 
 The motivation was to creata a company's content management system using Node.js, Inquirer and MySQL.
 
-I learnt about using node js, MySQL, Inquirer and much more.
+I learnt about using node js, MySQL, Inquirer, promises, seeding databases, creating schemas and much more.
 
 ## Table of Contents
 
@@ -15,11 +15,11 @@ I learnt about using node js, MySQL, Inquirer and much more.
 
 ## Installation
 
-To install necessary dependencies, run the following command: ``
+To install necessary dependencies, run the following command: ``. Please refer to the below instructional video for prompts.
 
 ## Usage
 
-The Github repository can be viewed via this link, https://github.com/ElsieMay/11_Homework_Express_Js_Note_Taker. The deployed application can be viewed via this Heroku link, https://elsie-note-taker.herokuapp.com.
+The Github repository can be viewed via this link, https://github.com/ElsieMay/12_Homework_Employee_Tracker.
 
 ## App Screenshots
 
@@ -33,7 +33,7 @@ https://drive.google.com/file/d/15HQZ4JhGfRFiEUlvXP_P77efr285wdTm/view
 
 I was aided by the BCS Learning assistant. They instructed me well.
 
-I followed these links for tutorials and additional information;
+I followed these links for tutorials and additional readings;
 
 https://www.youtube.com/watch?v=YYEC7ydDj4k<br>
 https://www.npmjs.com/package/console.table<br>

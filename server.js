@@ -1,6 +1,7 @@
 const cTable = require("console.table");
 // Import and require mysql2
-const mysql = require("mysql2");
+// const mysql = require("mysql2");
+const mysql = require("mysql2/promise");
 const inquirer = require("inquirer");
 const connection = require("./config/connection");
 
