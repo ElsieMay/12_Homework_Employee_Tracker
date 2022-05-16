@@ -67,7 +67,7 @@ const promptUser = (connection) => {
 };
 
 // Function to view all employees in database
-viewAllEmployees = () => {
+const viewAllEmployees = () => {
 	console.log("This is a comprehensive list of all employees in the company database");
 	const sql = `SELECT employee.id,
                 employee.first_name,
@@ -91,7 +91,7 @@ viewAllEmployees = () => {
 };
 
 // Function to view all roles listed in company database
-viewAllRoles = () => {
+const viewAllRoles = () => {
 	console.log("Below are the roles listed for this company");
 	const sql = `SELECT role.id,
                 role.title,
@@ -108,7 +108,7 @@ viewAllRoles = () => {
 };
 
 // Function to view all departments listed in company database
-viewAllDepartments = () => {
+const viewAllDepartments = () => {
 	console.log("Below are the departments listed for this company");
 	const sql = `SELECT department.id AS id, 
                 department.name AS department
@@ -121,7 +121,7 @@ viewAllDepartments = () => {
 };
 
 // Function to add an employee to database
-addAnEmployee = () => {
+const addAnEmployee = () => {
 	inquirer
 		.prompt([
 			{
@@ -214,7 +214,7 @@ addAnEmployee = () => {
 };
 
 // Function to add a role to database
-addARole = () => {
+const addARole = () => {
 	inquirer
 		.prompt([
 			{
@@ -281,7 +281,7 @@ addARole = () => {
 };
 
 // Function to add a department to database
-addADepartment = () => {
+const addADepartment = () => {
 	inquirer
 		.prompt([
 			{
@@ -311,7 +311,7 @@ addADepartment = () => {
 };
 
 // Function to update an employee's role in the database
-updateEmployeeRole = () => {
+const updateEmployeeRole = () => {
 	//SELECT employee and role values from table
 	let employeeSql = `SELECT employee.first_name, 
                         employee.last_name,
@@ -388,7 +388,7 @@ updateEmployeeRole = () => {
 };
 
 // Function to update an employee's role in the database
-updateEmployeeManager = () => {
+const updateEmployeeManager = () => {
 	//SELECT employee and role values from table
 	let managerSql = `SELECT employee.first_name, 
                         employee.last_name,
@@ -443,7 +443,7 @@ updateEmployeeManager = () => {
 };
 
 // Function to view employees by manager
-viewEmployeesByManager = () => {
+const viewEmployeesByManager = () => {
 	//SELECT employees and their departments from table
 	const empDepartmentSql = `SELECT employee.id,
                             employee.first_name,
@@ -463,7 +463,7 @@ viewEmployeesByManager = () => {
 };
 
 // Function to view employees by department
-viewEmployeesByDepartment = () => {
+const viewEmployeesByDepartment = () => {
 	//SELECT from list of departments
 	const depSelect = `SELECT name, id FROM department`;
 
@@ -503,7 +503,7 @@ viewEmployeesByDepartment = () => {
 };
 
 // Function to view employees by department
-viewUtilizedBudget = () => {
+const viewUtilizedBudget = () => {
 	//SELECT employees and their departments from table
 	const empDepartmentSql = `SELECT department_id
                              AS id,
@@ -525,7 +525,7 @@ viewUtilizedBudget = () => {
 };
 
 // Function to delete a department
-deleteDepartment = () => {
+const deleteDepartment = () => {
 	//SELECT from list of departments
 	const depSelect = `SELECT department.id, department.name FROM department AS department`;
 
@@ -559,7 +559,7 @@ deleteDepartment = () => {
 };
 
 // Function to delete a role
-deleteRole = () => {
+const deleteRole = () => {
 	//SELECT from list of departments
 	const depSelect = `SELECT role.id, role.title FROM role AS role`;
 
@@ -592,7 +592,7 @@ deleteRole = () => {
 	});
 };
 
-deleteEmployee = () => {
+const deleteEmployee = () => {
 	//SELECT from list of departments
 	const empSelect = `SELECT employee.id, employee.first_name, employee.last_name FROM employee AS employee`;
 
