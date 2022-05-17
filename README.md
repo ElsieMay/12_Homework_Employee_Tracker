@@ -2,7 +2,7 @@
 
 ## Description
 
-The motivation was to creata a company's content management system using Node.js, Inquirer and MySQL.
+The motivation was to create a company's content management system using Node.js, Inquirer and MySQL.
 
 I learnt about using node js, MySQL, Inquirer, promises, seeding databases, creating schemas and much more.
 
@@ -15,7 +15,7 @@ I learnt about using node js, MySQL, Inquirer, promises, seeding databases, crea
 
 ## Installation
 
-To install necessary dependencies, run the following command: ``. Please refer to the below instructional video for prompts.
+To install necessary dependencies, run the following command: `npm install`. Please refer to the below instructional video for running prompts.
 
 ## Usage
 
@@ -27,7 +27,7 @@ The Github repository can be viewed via this link, https://github.com/ElsieMay/1
 
 ## Demo
 
-https://drive.google.com/file/d/15HQZ4JhGfRFiEUlvXP_P77efr285wdTm/view
+https://drive.google.com/file/d/1mYjRQwVRjP7Gooxdh7t5fceY3ZnXpInE/view
 
 ## Credits
 

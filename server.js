@@ -152,7 +152,8 @@ addAnEmployee = () => {
 			},
 		])
 		.then((answer) => {
-			const employeeDetails = [answer.firstName, answer.lastName];
+			let firstName = answer.firstName;
+			let lastName = answer.lastName;
 
 			const roleSelect = `SELECT role.id, role.title FROM role`;
 
@@ -172,8 +173,6 @@ addAnEmployee = () => {
 					.then((roleChoice) => {
 						const role = roleChoice.role;
 
-						employeeDetails.push(role);
-
 						const managerSelect = `SELECT * FROM employee`;
 
 						connection.query(managerSelect, (error, data) => {
@@ -181,7 +180,7 @@ addAnEmployee = () => {
 							console.table(data);
 							promptUser();
 
-							const managers = data.map(({ id, first_name, last_name }) => ({ name: first_name, value: id }));
+							const managers = data.map(({ id, first_name, last_name }) => ({ name: `${first_name} ${last_name}`, value: id }));
 
 							inquirer
 								.prompt([
@@ -194,13 +193,16 @@ addAnEmployee = () => {
 								])
 
 								.then((managerChoice) => {
-									const manager = managerChoice.manager;
+									const employee = {
+										manager_id: managerChoice.manager,
+										role_id: role,
+										first_name: firstName,
+										last_name: lastName,
+									};
 
-									employeeDetails.push(manager);
+									const managerTbl = `INSERT INTO employee SET ?`;
 
-									const managerTbl = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)`;
-
-									connection.query(managerTbl, employeeDetails, (error, result) => {
+									connection.query(managerTbl, employee, (error, result) => {
 										if (error) throw error;
 										console.log("New employee has been added to the database.");
 
@@ -418,6 +420,7 @@ updateEmployeeManager = () => {
 				let employeeid = answer.employeeList;
 				const sql = `SELECT id, first_name, last_name FROM employee WHERE id != ?`;
 				connection
+					.promise()
 					.query(sql, employeeid, (error, response) => {
 						if (error) {
 							return console.error(error.message);
@@ -426,7 +429,7 @@ updateEmployeeManager = () => {
 					.then(([rows]) => {
 						let managers = rows;
 						const managerChoices = managers.map(({ id, first_name, last_name }) => ({
-							name: `${_first_name_} ${_last_name_}`,
+							name: `${first_name} ${last_name}`,
 							value: id,
 						}));
 						inquirer
@@ -439,7 +442,7 @@ updateEmployeeManager = () => {
 								},
 							])
 							.then((answer) => {
-								const sql = `UPDATE employee SET employee.manager_id = ? WHERE employee.id = ?`;
+								const sql = `UPDATE employee SET manager_id = ? WHERE id = ?`;
 								connection.query(sql, [employeeid, answer.updatedManager], (error, response) => {
 									if (error) {
 										return console.error(error.message);
