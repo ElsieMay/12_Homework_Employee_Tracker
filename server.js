@@ -400,7 +400,10 @@ updateEmployeeManager = () => {
 			return console.error(error.message);
 		}
 		// Array of employee names
-		const employeeArray = response.map((employee) => `${employee.first_name} ${employee.last_name}`);
+		const employeeArray = response.map(({ id, first_name, last_name }) => ({
+			name: `${first_name} ${last_name}`,
+			value: id,
+		}));
 		// Prompt to select employee
 		inquirer
 			.prompt([
@@ -410,38 +413,46 @@ updateEmployeeManager = () => {
 					message: "Which employee would you like to update?",
 					choices: employeeArray,
 				},
-				{
-					type: "list",
-					name: "updatedManager",
-					message: "Who would you like to update their manager to?",
-					choices: employeeArray,
-				},
 			])
 			.then((answer) => {
-				let employeeSelected, managerId;
-
-				response.forEach((employee) => {
-					if (answer.employeeList === `${employee.first_name} ${employee.last_name}`) {
-						employeeSelected = employee.id;
-					}
-					if (answer.updatedManager === `${employee.first_name} ${employee.last_name}`) {
-						managerId = employee.id;
-					}
-				});
-
-				const sql = `UPDATE employee SET employee.manager_id = ? WHERE employee.id = ?`;
-				connection.query(sql, [employeeSelected, managerId], (error, response) => {
-					if (error) {
-						return console.error(error.message);
-					}
-					console.table(response);
-					console.log("Employee's manager has been added");
-					viewAllEmployees();
-				});
+				let employeeid = answer.employeeList;
+				const sql = `SELECT id, first_name, last_name FROM employee WHERE id != ?`;
+				connection
+					.query(sql, employeeid, (error, response) => {
+						if (error) {
+							return console.error(error.message);
+						}
+					})
+					.then(([rows]) => {
+						let managers = rows;
+						const managerChoices = managers.map(({ id, first_name, last_name }) => ({
+							name: `${_first_name_} ${_last_name_}`,
+							value: id,
+						}));
+						inquirer
+							.prompt([
+								{
+									type: "list",
+									name: "updatedManager",
+									message: "Who would you like to update their manager to?",
+									choices: managerChoices,
+								},
+							])
+							.then((answer) => {
+								const sql = `UPDATE employee SET employee.manager_id = ? WHERE employee.id = ?`;
+								connection.query(sql, [employeeid, answer.updatedManager], (error, response) => {
+									if (error) {
+										return console.error(error.message);
+									}
+									console.table(response);
+									console.log("Employee's manager has been added");
+									viewAllEmployees();
+								});
+							});
+					});
 			});
 	});
 };
-
 // Function to view employees by manager
 viewEmployeesByManager = () => {
 	//SELECT employees and their departments from table
