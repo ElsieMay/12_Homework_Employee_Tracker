@@ -9,7 +9,8 @@
 		"mysql2": "^2.3.3",
 		"node.js": "^0.0.1-security",
 		"seed": "^0.4.4",
-		"sequelize": "^6.19.0"
+		"sequelize": "^6.19.0",
+		"util": "^0.12.4"
 	},
 	"scripts": {
 		"start": "node server.js",
