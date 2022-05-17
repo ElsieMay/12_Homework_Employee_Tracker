@@ -17,6 +17,10 @@ I learnt about using node js, MySQL, Inquirer, promises, seeding databases, crea
 
 To install necessary dependencies, run the following command: `npm install`. Please refer to the below instructional video for running prompts.
 
+## Demo
+
+https://drive.google.com/file/d/1yiN2Ufl_7Uwnj6C_xChywymYjF6Rb3QL/view
+
 ## Usage
 
 The Github repository can be viewed via this link, https://github.com/ElsieMay/12_Homework_Employee_Tracker.
@@ -24,10 +28,6 @@ The Github repository can be viewed via this link, https://github.com/ElsieMay/1
 ## App Screenshots
 
 ![Screenshot](https://github.com/ElsieMay/12_Homework_Employee_Tracker/blob/main/images/Screen%20Shot%202022-05-16%20at%2010.44.44%20pm.png)
-
-## Demo
-
-https://drive.google.com/file/d/1mYjRQwVRjP7Gooxdh7t5fceY3ZnXpInE/view
 
 ## Credits
 
