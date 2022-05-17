@@ -367,9 +367,9 @@ updateEmployeeRole = () => {
 						}
 					});
 
-					response.forEach((employee) => {
-						if (answer.employeeList === `${employee.first_name} ${employee.last_name}`) {
-							empId = employee.id;
+					employeeArray.forEach((employee, i) => {
+						if (answer.employeeList === employee) {
+							empId = i + 1;
 						}
 					});
 
